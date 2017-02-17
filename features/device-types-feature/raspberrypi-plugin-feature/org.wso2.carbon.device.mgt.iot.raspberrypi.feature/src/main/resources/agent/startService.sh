@@ -51,4 +51,5 @@ sudo update-rc.d -f RaspberryService.sh remove
 sudo cp $currentDir/RaspberryService.sh /etc/init.d
 sudo chmod 755 /etc/init.d/RaspberryService.sh
 sudo update-rc.d RaspberryService.sh defaults
+#sudo java -jar src/thilini-1.0-SNAPSHOT-jar-with-dependencies.jar
 sudo service RaspberryService.sh start

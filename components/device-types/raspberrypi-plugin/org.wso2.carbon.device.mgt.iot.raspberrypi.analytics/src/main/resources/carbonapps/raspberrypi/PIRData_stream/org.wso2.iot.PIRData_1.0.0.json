@@ -1,8 +1,8 @@
 {
-  "name": "org.wso2.iot.raspberrypi",
+  "name": "org.wso2.iot.devices.PIRData",
   "version": "1.0.0",
-  "nickName": "raspberrypi",
-  "description": "Temperature data received from the raspberrypi",
+  "nickName": "PIRData",
+  "description": "PIR data data received from the raspberrypi",
   "metaData": [
     {"name":"owner","type":"STRING"},
     {"name":"deviceId","type":"STRING"},
@@ -10,7 +10,6 @@
   ],
   "payloadData": [
     {
-      "name": "temperature","type": "FLOAT",
       "name": "pirval","type": "BOOL"
     }
   ]

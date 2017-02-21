@@ -18,6 +18,7 @@
 
 function onRequest(context) {
     var log = new Log("stats.js");
+    log.warn("PIR settings");
     var carbonServer = require("carbon").server;
     var device = context.unit.params.device;
     var devicemgtProps = require("/app/modules/conf-reader/main.js")["conf"];
@@ -35,7 +36,7 @@ function onRequest(context) {
         if (tokenPair) {
             token = tokenPair.accessToken;
         }
-        websocketEndpoint = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.PIR_Data/1.0.0?"
+        websocketEndpoint = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.PIRData/1.0.0?"
             + "deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type + "&websocketToken=" + token;
     }
     return {"device": device, "websocketEndpoint": websocketEndpoint};

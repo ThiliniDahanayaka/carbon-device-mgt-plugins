@@ -1,4 +1,4 @@
-!/usr/bin python
+#!/usr/bin python
 """
 /**
 * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
@@ -234,25 +234,30 @@ def connectAndPushData():
 #       This is a Thread object for reading PIR output continuously
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class PIRReaderThread(object):
-    filename="readings.txt"
     def __init__(self):
         self.file=None
         self.interval=3
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True  # Daemonize thread
+        thread.start()  # Start the execution
 
     def run(self):
+        filename="readings.txt"
         while True:
             try:
                 self.file=open(filename)
                 reading=self.file.read()
                 if reading=="Vacant":
-                    print "Vacant"
                     if iotUtils.LAST_PIR:
                         iotUtils.LAST_PIR=False
+                        time.sleep(PUSH_INTERVAL)
+                        print "Vacant"
                         connectAndPushData()
                 elif reading=="Occupied":
-                    print "Occupied"
                     if not iotUtils.LAST_PIR:
                         iotUtils.LAST_PIR=True
+                        time.sleep(PUSH_INTERVAL)
+                        print "Occupied"
                         connectAndPushData()
             except Exception, e:
                 print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
@@ -372,6 +377,7 @@ def main():
     # ListenHTTPServerThread()  # starts an HTTP Server that listens for operational commands to switch ON/OFF Led
     SubscribeToMQTTQueue()  # connects and subscribes to an MQTT Queue that receives MQTT commands from the server
     TemperatureReaderThread()  # initiates and runs the thread to continuously read temperature from DHT Sensor
+    PIRReaderThread()
     # time.sleep(2) #wait for agent to connect to broker before publishing data
     while True:
         try:

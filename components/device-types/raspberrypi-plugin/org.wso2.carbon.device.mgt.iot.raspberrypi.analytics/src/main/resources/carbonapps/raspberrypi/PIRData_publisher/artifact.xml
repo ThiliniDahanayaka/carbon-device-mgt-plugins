@@ -18,5 +18,5 @@
   -->
 
 <artifact name="PIRData_publisher" version="1.0.0" type="event/publisher" serverRole="DataAnalyticsServer">
-    <file>temperature_publisher.xml</file>
+    <file>PIRData_publisher.xml</file>
 </artifact>

@@ -42,7 +42,9 @@ sudo pip install paho-mqtt
 #installing ada
 sudo apt-get install build-essential python-dev
 unzip Adafruit_Python_DHT
-sudo python Adafruit_Python_DHT/setup.py install
+cd Adafruit_Python_DHT
+sudo python setup.py install
+cd ..
 
 sudo cp $currentDir/deviceConfig.properties $currentDir/src
 sudo cp -r $currentDir/src $destination
@@ -51,5 +53,5 @@ sudo update-rc.d -f RaspberryService.sh remove
 sudo cp $currentDir/RaspberryService.sh /etc/init.d
 sudo chmod 755 /etc/init.d/RaspberryService.sh
 sudo update-rc.d RaspberryService.sh defaults
-#sudo java -jar src/thilini-1.0-SNAPSHOT-jar-with-dependencies.jar
+echo "starting agent"
 sudo service RaspberryService.sh start

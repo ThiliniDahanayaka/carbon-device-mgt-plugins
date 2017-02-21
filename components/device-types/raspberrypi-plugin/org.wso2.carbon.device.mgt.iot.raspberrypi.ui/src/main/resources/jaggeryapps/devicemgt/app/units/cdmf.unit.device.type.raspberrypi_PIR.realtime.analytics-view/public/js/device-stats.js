@@ -29,6 +29,7 @@ $(window).unload(function () {
 
 //websocket connection
 function connect(target) {
+    alert ("debugging");
     if ('WebSocket' in window) {
         ws = new WebSocket(target);
     } else if ('MozWebSocket' in window) {
